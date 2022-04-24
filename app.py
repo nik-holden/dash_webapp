@@ -25,6 +25,8 @@ station_list = [i for i in daily_rain_df['stationID'].unique()]
 # Add the 'All' values to the list of station
 station_list.append('All')
 
+station_list.sort()
+
 # Create Dash app
 
 line_graph_app = dash.Dash(__name__)
