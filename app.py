@@ -27,7 +27,7 @@ station_list.append('All')
 
 # Create Dash app
 
-line_graph_app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
+line_graph_app = dash.Dash(__name__)
 app = line_graph_app.server
 
 line_graph_app.layout = html.Div(children=[
