@@ -30,6 +30,8 @@ station_list.append('All')
 dash_app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
 line_graph_app = dash_app.server
 
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
+line_graph_app = app.server
 
 line_graph_app.layout = html.Div(children=[
     html.H1(children='Monthly Total Daily Rain Amount'),
