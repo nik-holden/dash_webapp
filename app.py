@@ -33,7 +33,7 @@ line_graph_app = dash_app.server
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
 line_graph_app = app.server
 
-line_graph_app.layout = html.Div(children=[
+dash_app.layout = html.Div(children=[
     html.H1(children='Monthly Total Daily Rain Amount'),
     dcc.Dropdown(id='station_ID',
                  options=[{'label': i, 'value': i} for i in station_list],
@@ -44,7 +44,7 @@ line_graph_app.layout = html.Div(children=[
 ])
 
 # set up callback function
-@line_graph_app.callback(
+@dash_app.callback(
     Output(component_id='total_daily_rain', component_property='figure'),
     Input(component_id='station_ID', component_property='value')
 )
@@ -66,4 +66,4 @@ def filtered_daily_rain(selected_stationID):
 
 # Run local server
 if __name__ == '__main__':
-    line_graph_app.run_server(debug=True)
+    dash_app.run_server(debug=True)
