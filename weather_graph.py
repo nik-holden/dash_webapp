@@ -26,8 +26,9 @@ station_list = [i for i in daily_rain_df['stationID'].unique()]
 station_list.append('All')
 
 # Create Dash app
-line_graph_app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
 
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
+line_graph_app = app.server
 
 line_graph_app.layout = html.Div(children=[
     html.H1(children='Monthly Total Daily Rain Amount'),
