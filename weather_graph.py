@@ -27,8 +27,8 @@ station_list.append('All')
 
 # Create Dash app
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
-line_graph_app = app.server
+dash_app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
+line_graph_app = dash_app.server
 
 
 line_graph_app.layout = html.Div(children=[
@@ -46,6 +46,7 @@ line_graph_app.layout = html.Div(children=[
     Output(component_id='total_daily_rain', component_property='figure'),
     Input(component_id='station_ID', component_property='value')
 )
+
 def filtered_daily_rain(selected_stationID):
     if selected_stationID == 'All':
         filtered_daily_rain_df = daily_rain_df
