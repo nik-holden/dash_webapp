@@ -1,11 +1,10 @@
 from dash import html
 from dash import dcc
-import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 import plotly.express as px
 
 import common_functions as cf
-from app import dash_app
+from app import app
 
 #connection, sqlalchmey_engine = cf.azure_sql_db_connection()
 
@@ -45,7 +44,7 @@ layout = html.Div([
 ])
 
 # set up callback function
-@dash_app.callback(
+@app.callback(
     Output(component_id='total_daily_rain', component_property='figure'),
     [Input(component_id='station_ID', component_property='value')]
 )
