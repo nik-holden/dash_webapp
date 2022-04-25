@@ -1,4 +1,5 @@
 import pyodbc
+import pandas as pd
 from sqlalchemy import create_engine
 from urllib.parse import quote_plus
 from config import azure_sql_db_credentials
@@ -18,4 +19,14 @@ def azure_sql_db_connection():
 
 
     return(connection, sqlalchmey_engine)
+
+def read_from_db(sql_stmt):
+
+    connection, sqlalchmey_engine = azure_sql_db_connection()
+
+    with sqlalchmey_engine.connect() as conn:
+
+        df = pd.read_sql(sql_stmt, conn)
+
+    return df
 
