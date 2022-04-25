@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'dash-weather-app'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8F7A466C5B0C4566A7784C7C5073D9AE }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B26A6139F3DD4112888D6674B0948B1E }}
