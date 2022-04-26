@@ -8,10 +8,10 @@ from app import dash_app
 from apps import line_monthly_rainfall
 
 dash_app.layout = html.Div([
+    dcc.Location(id='url', refresh=False),
     html.Div([
         dcc.Link('Total Monthly Rainfall', href='/dash_apps/line_monthly_rainfall')
     ], className="row"),
-    dcc.Location(id='url', refresh=False),
     html.Div(id='page_content', children=[])
 ])
 
@@ -24,7 +24,7 @@ def display_page(pathname):
     if pathname == '/dash_apps/line_monthly_rainfall':
         return line_monthly_rainfall.layout
     else:
-        return line_monthly_rainfall.layout
+        return print('line_monthly_rainfall.layout')
 
 # Run local app
 if __name__ == '__main__':

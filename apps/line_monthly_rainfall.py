@@ -35,14 +35,13 @@ layout = html.Div([
             ),
         )
     ],className='row'),
-    #dcc.Interval(id='rain_graph_interval', interval=1000, n_intervals=10),
     dcc.Graph(id='total_daily_rain'),
 ])
 
 # set up callback function
 @dash_app.callback(
     Output(component_id='total_daily_rain', component_property='figure'),
-    [Input(component_id='station_ID', component_property='value')]
+    Input(component_id='station_ID', component_property='value')
 )
 
 def filtered_daily_rain(selected_stationID='All'):
@@ -54,7 +53,7 @@ def filtered_daily_rain(selected_stationID='All'):
     line_fig = px.line(data_frame=filtered_daily_rain_df,
                        x='observation_date',
                        y='running_rainfall_total',
-                       title=f'Current Mmonths Daily Total Rainfall: {selected_stationID}',
+                       title=f'Current Months Daily Total Rainfall: {selected_stationID}',
                        color='stationID',
                        width=1200, height=600)
 
