@@ -4,7 +4,7 @@ from dash.dependencies import Input, Output
 import plotly.express as px
 
 import common_functions as cf
-from app import app
+from app import dash_app
 
 sql_stmt = """
 SELECT *
@@ -40,7 +40,7 @@ layout = html.Div([
 ])
 
 # set up callback function
-@app.callback(
+@dash_app.callback(
     Output(component_id='total_daily_rain', component_property='figure'),
     [Input(component_id='station_ID', component_property='value')]
 )
