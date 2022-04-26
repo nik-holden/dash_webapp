@@ -1,14 +1,17 @@
+import dash
 from dash import html
 from dash import dcc
 from dash.dependencies import Input, Output
 
 from app import app 
-from app import dash_app
+#from app import dash_app
+
+dash_app = dash.Dash(__name__)
 
 from apps import line_monthly_rainfall
 
 dash_app.layout = html.Div(children=[
-    html.H1("Helllo")
+    html.H1("Hello")
 ])
 
 """dash_app.layout = html.Div(children=[
