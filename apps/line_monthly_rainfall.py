@@ -22,7 +22,7 @@ station_list.append('All')
 
 station_list.sort()
 
-layout = html.Div([
+layout = html.Div(children=[
 
     html.H1('Monthly Total Daily Rain Amount'),
 
