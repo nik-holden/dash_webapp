@@ -2,12 +2,12 @@ from dash import html
 from dash import dcc
 from dash.dependencies import Input, Output
 
-from app import dash_app
 from app import app
+from app import server
 
 from apps import line_monthly_rainfall
 
-dash_app.layout = html.Div([
+app.layout = html.Div([
     html.Div([
         dcc.Link('Total Monthly Rainfall', href='/dash_apps/line_monthly_rainfall')
     ], className="row"),
@@ -15,7 +15,7 @@ dash_app.layout = html.Div([
     html.Div(id='page_content', children=[])
 ])
 
-@dash_app.callback(
+@app.callback(
     Output(component_id='page_content', component_property='children'),
     Input(component_id='url', component_property='pathname')
 )
@@ -29,4 +29,4 @@ def display_page(pathname):
 # Run local app
 if __name__ == '__main__':
     
-    dash_app.run_server(debug=True, host=0.0.0.0 port=80)
+    app.run_server(debug=True)
