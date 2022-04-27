@@ -39,7 +39,7 @@ layout = html.Div(children=[
 ])
 
 # set up callback function
-@dash_app.callback(
+@app.callback(
     Output(component_id='total_daily_rain', component_property='figure'),
     Input(component_id='station_ID', component_property='value')
 )
