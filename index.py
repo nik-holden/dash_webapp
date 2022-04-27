@@ -3,13 +3,13 @@ from dash import html
 from dash import dcc
 from dash.dependencies import Input, Output
 
-from app import app as application
+from app import application as app
 from app import server
 
 
 from apps import line_monthly_rainfall
 
-application.layout = html.Div(children=[
+app.layout = html.Div(children=[
     html.H1("Hello")
 ])
 
@@ -35,4 +35,4 @@ def display_page(pathname):
 # Run local app
 if __name__ == '__main__':
     
-    application.run_server(debug=False)
+    app.run_server(debug=False)
