@@ -4,7 +4,7 @@ from dash.dependencies import Input, Output
 import plotly.express as px
 
 import common_functions as cf
-from app import dash_app
+from dashapp import app
 
 sql_stmt = """
 SELECT *

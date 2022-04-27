@@ -3,8 +3,8 @@ from dash import html
 from dash import dcc
 from dash.dependencies import Input, Output
 
-from app import app
-from app import server as svr
+from dashapp import app
+from dashapp import server as svr
 
 
 from apps import line_monthly_rainfall
