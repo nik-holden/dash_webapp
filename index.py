@@ -6,7 +6,7 @@ from dashapp import app
 from dashapp import server as svr
 
 
-from apps import line_monthly_rainfall
+#from apps import line_monthly_rainfall
 
 app.layout = html.Div(children=[
     html.H1("Hello")
