@@ -3,8 +3,8 @@ from dash import dcc
 from dash.dependencies import Input, Output
 import plotly.express as px
 
-import .common_functions as cf
-from .index import dash_app
+import common_functions as cf
+from index import dash_app
 
 sql_stmt = """
 SELECT *
