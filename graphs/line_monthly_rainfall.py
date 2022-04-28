@@ -3,7 +3,7 @@ from dash import dcc
 from dash.dependencies import Input, Output
 import plotly.express as px
 
-import common_functions as cf
+from common_functions import read_from_db
 from index import dash_app
 
 sql_stmt = """
@@ -13,9 +13,7 @@ FROM weather.daily_weather_metrics WHERE current_month_flag = 1
 """
 
 #daily_rain_df = pd.read_sql(sql_stmt, conn)
-daily_rain_df = cf.read_from_db(sql_stmt)
-
-print(dash_app)
+daily_rain_df = read_from_db(sql_stmt)
 
 # Create list of station ID's
 station_list = [i for i in daily_rain_df['stationID'].unique()]
