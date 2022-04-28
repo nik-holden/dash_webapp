@@ -1,5 +1,5 @@
-from app import app
-from app import dash_app
+from .app import app
+from .app import dash_app
 
 from dash import html
 
