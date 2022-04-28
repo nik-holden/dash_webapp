@@ -1,13 +1,13 @@
 from dash import Dash
 from dash import html
 
-dash_app = Dash(__name__)
+app = Dash(__name__)
 
-server = dash_app.server
+server = app.server
 
-dash_app.layout = html.Div([
+app.layout = html.Div([
     html.H1('Hello')
 ])
 
 if __name__ == '__main__':
-    dash_app.run_server(debug=False)
+    app.run_server(debug=False)
