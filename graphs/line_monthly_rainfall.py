@@ -1,10 +1,8 @@
-from dash import html
-from dash import dcc
-from dash.dependencies import Input, Output
+from dash import html, dcc, callback, Input, Output
 import plotly.express as px
 
 from common_functions import read_from_db
-from index import dash_app
+
 
 sql_stmt = """
 SELECT *
@@ -40,7 +38,7 @@ layout = html.Div([
 ])
 
 # set up callback function
-@dash_app.callback(
+@callback(
     Output(component_id='total_daily_rain', component_property='figure'),
     Input(component_id='station_ID', component_property='value')
 )
