@@ -23,7 +23,7 @@ def display_page(pathname):
     if pathname == '/dash_apps/line_monthly_rainfall':
         return line_monthly_rainfall.layout
     else:
-        return line_monthly_rainfall.layout
+        return print('line_monthly_rainfall.layout')
 
 # Run local app
 if __name__ == '__main__':
