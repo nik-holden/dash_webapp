@@ -1,9 +1,9 @@
-from dash import Dash
+import dash
 from dash import html
 
-app = Dash(__name__)
+app = dash.Dash()
 
-server = app.server
+#server = app.server
 
 app.layout = html.Div([
     html.H1('Hello')
