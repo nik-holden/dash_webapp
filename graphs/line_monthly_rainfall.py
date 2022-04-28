@@ -9,10 +9,13 @@ from index import dash_app
 sql_stmt = """
 SELECT *
 , SUM(metric_precipitationDailyTotal) over(partition by stationID order by observation_date) as running_rainfall_total 
-FROM weather.daily_weather_metrics WHERE current_month_flag = 1"""
+FROM weather.daily_weather_metrics WHERE current_month_flag = 1
+"""
 
 #daily_rain_df = pd.read_sql(sql_stmt, conn)
 daily_rain_df = cf.read_from_db(sql_stmt)
+
+print(dash_app)
 
 # Create list of station ID's
 station_list = [i for i in daily_rain_df['stationID'].unique()]

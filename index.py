@@ -5,7 +5,7 @@ from dash.dependencies import Input, Output
 
 from graphs import line_monthly_rainfall
 
-dash_app = dash.Dash()
+dash_app = dash.Dash(__name__, suppress_callback_exceptions=True)
 
 app = dash_app.server
 
@@ -26,13 +26,10 @@ def display_page(pathname):
     if pathname == '/dash_apps/line_monthly_rainfall':
         return line_monthly_rainfall.layout
     else:
-        return print('line_monthly_rainfall.layout')
+        return line_monthly_rainfall.layout
 
 # Run local app
 if __name__ == '__main__':
     
     dash_app.run_server(debug=False)
 
-# Run local server
-if __name__ == '__main__':
-    line_graph_app.run_server(debug=True)
