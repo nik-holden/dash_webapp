@@ -3,7 +3,7 @@ from dash import html
 from dash import dcc
 from dash.dependencies import Input, Output
 
-from graphs import line_monthly_rainfall
+from .graphs import line_monthly_rainfall
 
 dash_app = dash.Dash(__name__, suppress_callback_exceptions=True)
 
