@@ -1,7 +1,14 @@
-from .app import app
-from .app import dash_app
+#from .app import app
+#from .app import dash_app
+
+import dash
 
 from dash import html
+
+
+dash_app = dash.Dash()
+
+app = dash_app.server
 
 dash_app.layout = html.Div([
     html.H1('Hello')
