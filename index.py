@@ -2,7 +2,7 @@ from dash import Dash, html, dcc, Input, Output, callback
 
 #from graphs import line_monthly_rainfall
 
-app = Dash(__name__, suppress_callback_exceptions=True)
+app = Dash(__name__e)
 
 server = app.server
 
