@@ -1,6 +1,6 @@
 from dash import Dash, html, dcc, Input, Output, callback
 
-from graphs import line_monthly_rainfall
+#from graphs import line_monthly_rainfall
 
 app = Dash(__name__, suppress_callback_exceptions=True)
 
@@ -8,7 +8,7 @@ server = app.server
 
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
-    html.Div([
+    html.H1([
         dcc.Link('Total Monthly Rainfall', href='/dash_apps/line_monthly_rainfall')
     ], className="row"),
     html.Div(id='page_content', children=[])
