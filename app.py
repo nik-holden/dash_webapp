@@ -6,7 +6,7 @@ app = dash.Dash()
 # server = app.server
 
 app.layout = html.Div([
-    dcc.Location(id='url', refresh=False),
+    
     html.H1(['Hello'])
         ])
 
