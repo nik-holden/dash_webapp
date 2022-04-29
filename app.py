@@ -1,8 +1,7 @@
-from dash import Dash, html, dcc, Input, Output, callback
+import dash 
+from dash import html, dcc
 
-#from graphs import line_monthly_rainfall
-
-app = Dash(__name__)
+app = dash.Dash(__name__)
 
 server = app.server
 
