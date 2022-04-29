@@ -8,22 +8,8 @@ server = app.server
 
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
-    html.H1([
-        dcc.Link('Total Monthly Rainfall', href='/dash_apps/line_monthly_rainfall')
-    ], className="row"),
-    html.Div(id='page_content', children=[])
-])
-
-@callback(
-    Output(component_id='page_content', component_property='children'),
-    Input(component_id='url', component_property='pathname')
-)
-
-def display_page(pathname):
-    if pathname == '/dash_apps/line_monthly_rainfall':
-        return line_monthly_rainfall.layout
-    else:
-        return print('line_monthly_rainfall.layout')
+    html.H1(['Hello'])
+        ])
 
 # Run local app
 if __name__ == '__main__':
