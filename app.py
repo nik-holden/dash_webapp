@@ -1,9 +1,9 @@
 import dash 
 from dash import html, dcc
 
-app = dash.Dash(__name__)
+app = dash.Dash()
 
-server = app.server
+# server = app.server
 
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
