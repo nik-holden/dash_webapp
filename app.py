@@ -1,11 +1,13 @@
-import dash 
-from dash import html
+from dash import html, Dash
 
-app = dash.Dash()
+dash_app = Dash(__name__)
 
-# server = app.server
+app = dash_app.server
 
-app.layout = html.Div([
+print('dash_app ', callable(dash_app))
+print('app ', callable(app))
+
+dash_app.layout = html.Div([
     
     html.H1(['Hello'])
         ])
@@ -13,5 +15,5 @@ app.layout = html.Div([
 # Run local app
 if __name__ == '__main__':
     
-    app.run_server(debug=False)
+    dash_app.run_server(debug=False)
 
