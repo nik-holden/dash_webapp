@@ -1,6 +1,6 @@
 import dash
 from dash import Dash, html
 
-app = Dash(__name__)
+dash_app = Dash(__name__)
 
-server = app.server
+app = dash_app.server
