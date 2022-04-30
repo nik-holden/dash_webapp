@@ -1,11 +1,11 @@
-from app import dash_app as app
+from app import app, server
 #from app import app as server
 from dash import html, dcc
 from dash.dependencies import Input, Output
 
 from graphs import line_monthly_rainfall
 
-server = app.server
+#server = app.server
 print('from app import ', callable(app))
 print('server ', callable(server))
 
