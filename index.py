@@ -1,8 +1,9 @@
-from app import dash_app, app
+from app import dash_app as app
+from app import app as server
 from dash import html, dcc
 
-print('dash_app ', callable(dash_app))
-print('app ', callable(app))
+print('from app import ', callable(app))
+print('server ', callable(server))
 
 app.layout = html.Div([
     
@@ -12,5 +13,5 @@ app.layout = html.Div([
 # Run local app
 if __name__ == '__main__':
     
-    dash_app.run_server(debug=False)
+    app.run_server(debug=False)
 
