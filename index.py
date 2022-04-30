@@ -1,7 +1,8 @@
 from app import dash_app as app
-from app import app as server
+#from app import app as server
 from dash import html, dcc
 
+server = app.server
 print('from app import ', callable(app))
 print('server ', callable(server))
 
