@@ -1,5 +1,5 @@
 import dash 
-from dash import html, dcc
+from dash import html
 
 app = dash.Dash()
 
