@@ -4,7 +4,7 @@ from dash import html, dcc
 print('dash_app ', callable(dash_app))
 print('app ', callable(app))
 
-dash_app.layout = html.Div([
+app.layout = html.Div([
     
     html.H1(['Hello'])
         ])
