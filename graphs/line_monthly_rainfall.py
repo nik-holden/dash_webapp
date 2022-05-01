@@ -12,6 +12,7 @@ CASE WHEN t2.station_owner IS NOT NULL THEN t2.station_owner ELSE t1.stationID E
 FROM weather.daily_weather_metrics t1
 JOIN weather.DIM_weatherstation_details t2 ON t1.stationID = t2.station_id
 WHERE current_month_flag = 1
+ORDER BY stationID, observation_date 
 """
 
 #daily_rain_df = pd.read_sql(sql_stmt, conn)

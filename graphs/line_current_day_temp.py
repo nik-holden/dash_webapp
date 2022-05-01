@@ -12,7 +12,7 @@ CASE WHEN t2.station_owner IS NOT NULL THEN t2.station_owner ELSE t1.stationID E
 FROM weather.raw_observations t1
 JOIN weather.DIM_weatherstation_details t2 ON t1.stationID = t2.station_id
 WHERE current_date_flag = 1 
-ORDER BY t2.station_id, t1.id
+ORDER BY t2.station_id, t1.observation_10M_reporting_period
 """
 
 curr_day_temp_df = read_from_db(sql_stmt)
