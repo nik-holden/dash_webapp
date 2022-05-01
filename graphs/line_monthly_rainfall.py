@@ -5,9 +5,13 @@ from common_functions import read_from_db
 
 
 sql_stmt = """
-SELECT *
+SELECT 
+CASE WHEN t2.station_owner IS NOT NULL THEN t2.station_owner ELSE t1.stationID END AS stationID
+,observation_date
 , SUM(metric_precipitationDailyTotal) over(partition by stationID order by observation_date) as running_rainfall_total 
-FROM weather.daily_weather_metrics WHERE current_month_flag = 1
+FROM weather.daily_weather_metrics t1
+JOIN weather.DIM_weatherstation_details t2 ON t1.stationID = t2.station_id
+WHERE current_month_flag = 1
 """
 
 #daily_rain_df = pd.read_sql(sql_stmt, conn)

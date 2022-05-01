@@ -6,11 +6,12 @@ from common_functions import read_from_db
 
 sql_stmt = """
 SELECT
-stationID
+CASE WHEN t2.station_owner IS NOT NULL THEN t2.station_owner ELSE t1.stationID END AS stationID
 ,observation_date
 ,metric_min_temp AS min_temperature
 ,metric_max_temp AS max_temperature
-from weather.daily_weather_metrics
+from weather.daily_weather_metrics t1
+JOIN weather.DIM_weatherstation_details t2 ON t1.stationID = t2.station_id
 ORDER BY stationID, observation_date
 """
 

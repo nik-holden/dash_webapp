@@ -5,7 +5,14 @@ from common_functions import read_from_db
 
 
 sql_stmt = """
-SELECT stationID, observation_10M_reporting_period AS time, metric_temp AS temprature from weather.raw_observations WHERE current_date_flag = 1 ORDER BY stationID, id
+SELECT 
+CASE WHEN t2.station_owner IS NOT NULL THEN t2.station_owner ELSE t1.stationID END AS stationID
+,observation_10M_reporting_period AS time
+,metric_temp AS temprature 
+FROM weather.raw_observations t1
+JOIN weather.DIM_weatherstation_details t2 ON t1.stationID = t2.station_id
+WHERE current_date_flag = 1 
+ORDER BY t2.station_id, t1.id
 """
 
 curr_day_temp_df = read_from_db(sql_stmt)
