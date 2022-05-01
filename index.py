@@ -4,15 +4,17 @@ from dash import html, dcc
 from dash.dependencies import Input, Output
 
 from graphs import line_monthly_rainfall
+from graphs import line_current_day_temp
 
 server = app.server
-print('from app import ', callable(app))
+print('app ', callable(app))
 print('server ', callable(server))
 
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div([
-        dcc.Link('Total Monthly Rainfall', href='/dash_apps/line_monthly_rainfall')
+        dcc.Link('Total Monthly Rainfall | ', href='/dash_apps/line_monthly_rainfall'),
+        dcc.Link('Current Day Temperature', href='/dash_apps/line_current_day_temp')
     ], className="row"),
     html.Div(id='page_content', children=[])
 ])
@@ -23,8 +25,10 @@ app.layout = html.Div([
 )
 
 def display_page(pathname):
-    if pathname == '/apps/line_monthly_rainfall':
+    if pathname == '/dash_apps/line_monthly_rainfall':
         return line_monthly_rainfall.layout
+    elif pathname == '/dash_apps/line_current_day_temp':
+        return line_current_day_temp.layout
     else:
         return line_monthly_rainfall.layout
 # Run local app
