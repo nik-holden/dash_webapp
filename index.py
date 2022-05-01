@@ -5,16 +5,18 @@ from dash.dependencies import Input, Output
 
 from graphs import line_monthly_rainfall
 from graphs import line_current_day_temp
+from graphs import line_daily_temp
 
 server = app.server
 print('app ', callable(app))
 print('server ', callable(server))
 
-app.layout = html.Div([
+app.layout = html.Div([ 
     dcc.Location(id='url', refresh=False),
     html.Div([
         dcc.Link('Total Monthly Rainfall | ', href='/dash_apps/line_monthly_rainfall'),
-        dcc.Link('Current Day Temperature', href='/dash_apps/line_current_day_temp')
+        dcc.Link('Current Day Temperature | ', href='/dash_apps/line_current_day_temp'),
+        dcc.Link('Daily high-low Temperatures', href='/dash_apps/line_daily_temp')
     ], className="row"),
     html.Div(id='page_content', children=[])
 ])
@@ -29,6 +31,8 @@ def display_page(pathname):
         return line_monthly_rainfall.layout
     elif pathname == '/dash_apps/line_current_day_temp':
         return line_current_day_temp.layout
+    elif pathname == '/dash_apps/line_daily_temp':
+        return line_daily_temp.layout
     else:
         return line_monthly_rainfall.layout
 # Run local app
