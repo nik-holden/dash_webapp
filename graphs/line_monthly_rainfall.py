@@ -40,6 +40,10 @@ layout = html.Div([
         )
     ],className='row'),
     dcc.Graph(id='total_daily_rain'),
+    dcc.Interval(
+        id='10-minute-interval',
+        interval=300000 #300 seconds, 5 minutes
+    )
 ])
 
 # set up callback function

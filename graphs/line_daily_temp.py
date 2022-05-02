@@ -12,10 +12,11 @@ CASE WHEN t2.station_owner IS NOT NULL THEN t2.station_owner ELSE t1.stationID E
 ,metric_max_temp AS max_temperature
 from weather.daily_weather_metrics t1
 JOIN weather.DIM_weatherstation_details t2 ON t1.stationID = t2.station_id
-ORDER BY stationID, observation_date
 """
 
 daily_temp_df = read_from_db(sql_stmt)
+
+daily_temp_df.sort_values(by=['observation_date'])
 
 # Create list of station ID's
 station_list = [i for i in daily_temp_df['stationID'].unique()]
@@ -38,6 +39,10 @@ layout = html.Div([
         )
     ],className='row'),
     dcc.Graph(id='daily_temp'),
+    dcc.Interval(
+        id='10-minute-interval',
+        interval=300000 #300 seconds, 5 minutes
+    )
 ])
 
 # set up callback function

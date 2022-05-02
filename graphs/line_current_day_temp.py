@@ -7,7 +7,7 @@ from common_functions import read_from_db
 sql_stmt = """
 SELECT 
 CASE WHEN t2.station_owner IS NOT NULL THEN t2.station_owner ELSE t1.stationID END AS stationID
-,observation_10M_reporting_period AS time
+,CAST(substring(observation_10M_reporting_period, 1,13)+':'+substring(observation_10M_reporting_period, 15,2)+':00' as datetime) AS time
 ,metric_temp AS temprature 
 FROM weather.raw_observations t1
 JOIN weather.DIM_weatherstation_details t2 ON t1.stationID = t2.station_id
@@ -39,6 +39,10 @@ layout = html.Div([
         )
     ],className='row'),
     dcc.Graph(id='curr_day_temp'),
+    dcc.Interval(
+        id='10-minute-interval',
+        interval=300000 #300 seconds, 5 minutes
+    )
 ])
 
 # set up callback function
