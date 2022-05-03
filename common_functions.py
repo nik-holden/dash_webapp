@@ -30,3 +30,8 @@ def read_from_db(sql_stmt):
 
     return df
 
+def refresh_interval():
+    dcc.Interval(
+        id='1-minute-interval',
+        interval=60000 #60 seconds, 1 minutes
+    )

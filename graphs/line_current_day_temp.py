@@ -31,7 +31,7 @@ layout = html.Div([
 
     html.Div([
         html.Div(dcc.Dropdown(
-            id='station_ID',
+            id='cdt_station_ID',
             clearable=False,
             value='All',
             options=[{'label': i, 'value': i} for i in station_list],
@@ -40,15 +40,15 @@ layout = html.Div([
     ],className='row'),
     dcc.Graph(id='curr_day_temp'),
     dcc.Interval(
-        id='10-minute-interval',
-        interval=300000 #300 seconds, 5 minutes
+        id='lcd_1-minute-interval',
+        interval=60000 #60 seconds, 1 minutes
     )
 ])
 
 # set up callback function
 @callback(
     Output(component_id='curr_day_temp', component_property='figure'),
-    Input(component_id='station_ID', component_property='value')
+    Input(component_id='cdt_station_ID', component_property='value')
 )
 
 def filtered_curr_day_temp(selected_stationID='All'):
@@ -62,6 +62,6 @@ def filtered_curr_day_temp(selected_stationID='All'):
                        y='temprature',
                        title=f'Current Days Tempratures: {selected_stationID}',
                        color='stationID',
-                       width=1200, height=600)
+                       width=700)
 
     return line_fig

@@ -1,3 +1,4 @@
+from turtle import width
 from dash import html, dcc, callback, Input, Output
 import plotly.graph_objects as go
 
@@ -30,24 +31,27 @@ layout = html.Div([
 
     html.Div([
         html.Div(dcc.Dropdown(
-            id='station_ID',
+            id='dt_station_ID',
             clearable=False,
             value=first_stationID,
             options=[{'label': i, 'value': i} for i in station_list],
             ),
         )
     ],className='row'),
-    dcc.Graph(id='daily_temp'),
+    dcc.Graph(id='daily_temp',
+    figure={'layout':{'width': 700}}
+    ),
+    
     dcc.Interval(
-        id='10-minute-interval',
-        interval=300000 #300 seconds, 5 minutes
+        id='dt_1-minute-interval',
+        interval=60000 #60 seconds, 1 minutes
     )
 ])
 
 # set up callback function
 @callback(
     Output(component_id='daily_temp', component_property='figure'),
-    Input(component_id='station_ID', component_property='value')
+    Input(component_id='dt_station_ID', component_property='value')
 )
 
 def filtered_daily_temp(selected_stationID=first_stationID):

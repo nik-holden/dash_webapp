@@ -32,7 +32,7 @@ layout = html.Div([
 
     html.Div([
         html.Div(dcc.Dropdown(
-            id='station_ID',
+            id='mr_station_ID',
             clearable=False,
             value='All',
             options=[{'label': i, 'value': i} for i in station_list],
@@ -41,15 +41,15 @@ layout = html.Div([
     ],className='row'),
     dcc.Graph(id='total_daily_rain'),
     dcc.Interval(
-        id='10-minute-interval',
-        interval=300000 #300 seconds, 5 minutes
+        id='mr_1-minute-interval',
+        interval=60000 #60 seconds, 1 minutes
     )
 ])
 
 # set up callback function
 @callback(
     Output(component_id='total_daily_rain', component_property='figure'),
-    Input(component_id='station_ID', component_property='value')
+    Input(component_id='mr_station_ID', component_property='value')
 )
 
 def filtered_daily_rain(selected_stationID='All'):
@@ -63,6 +63,6 @@ def filtered_daily_rain(selected_stationID='All'):
                        y='running_rainfall_total',
                        title=f'Current Months Daily Total Rainfall: {selected_stationID}',
                        color='stationID',
-                       width=1200, height=600)
+                       width=700)
 
     return line_fig
