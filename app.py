@@ -1,4 +1,6 @@
-from dash import html, dcc, Dash
+import dash 
+import dash.html as html
+import dash.dcc as dcc
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 
@@ -7,7 +9,7 @@ from graphs import line_current_day_temp
 from graphs import line_daily_temp
 from graphs import tile_graphs
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 server = app.server
 print('app ', callable(app))
