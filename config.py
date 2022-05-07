@@ -4,8 +4,7 @@ from azure.keyvault.secrets import SecretClient
 TENANT_ID = "e074f948-369b-4e94-9e9f-043b7464a9db"
 CLIENT_ID = "9729ce94-5a17-474e-89cd-7c0c2fab487d"
 CLIENT_SECRET = "E~O7Q~vVn6JOsITujsEh3OStzo3P_2k4crUpu"
-from azure.identity import ClientSecretCredential
-from azure.keyvault.secrets import SecretClient
+
 
 KEYVAULT_NAME = 'personal-nh'
 KEYVAULT_URI = f'https://{KEYVAULT_NAME}.vault.azure.net/'
