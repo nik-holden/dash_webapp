@@ -38,8 +38,7 @@ layout = html.Div([
             ),
         )
     ],className='row'),
-    dcc.Graph(id='daily_temp',
-    figure={'layout':{'width': 700}}
+    dcc.Graph(id='daily_temp'
     ),
     
     dcc.Interval(
