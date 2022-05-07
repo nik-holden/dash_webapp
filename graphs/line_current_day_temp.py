@@ -61,7 +61,7 @@ def filtered_curr_day_temp(selected_stationID='All'):
                        x='time',
                        y='temprature',
                        title=f'Current Days Tempratures: {selected_stationID}',
-                       color='stationID',
-                       width=700)
+                       color='stationID'
+                       )
 
     return line_fig
