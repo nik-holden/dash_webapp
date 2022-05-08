@@ -1,7 +1,9 @@
 from dash import html, dcc, callback, Input, Output
 import plotly.express as px
 
-from common_functions import read_from_db
+from common_functions import read_from_db, temp_axis_temp_list
+
+temprature_axis_list = temp_axis_temp_list(-4, 40)
 
 
 sql_stmt = """
@@ -27,7 +29,7 @@ station_list.sort()
 
 layout = html.Div([
 
-    html.H1('Current Days Tempratures'),
+    html.H1('Current Days Temperatures'),
 
     html.Div([
         html.Div(dcc.Dropdown(
@@ -60,8 +62,10 @@ def filtered_curr_day_temp(selected_stationID='All'):
     line_fig = px.line(data_frame=filtered_curr_day_temp_df,
                        x='time',
                        y='temprature',
-                       title=f'Current Days Tempratures: {selected_stationID}',
+                       title=f'Current Days Temperatures: {selected_stationID}',
                        color='stationID'
                        )
+
+    line_fig.update_layout(yaxis_range=[-5, 35])
 
     return line_fig
