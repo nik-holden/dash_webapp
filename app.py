@@ -7,6 +7,7 @@ import dash_bootstrap_components as dbc
 from graphs import line_monthly_rainfall
 from graphs import line_current_day_temp
 from graphs import line_daily_temp
+from graphs import bar_day_rainfall
 #from graphs import tile_graphs
 
 app_ = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -20,6 +21,7 @@ app_.layout = html.Div([
     html.Div([
         #dcc.Link('Multiple Graphs', href='/dash_app_s/tile_graphs'),
         dcc.Link('Total Monthly Rainfall', href='/dash_app_s/line_monthly_rainfall'),
+        dcc.Link('Daily Rainfall', href='/dash_app_s/bar_day_rainfall'),
         dcc.Link('Current Day Temperature', href='/dash_app_s/line_current_day_temp'),
         dcc.Link('Daily high-low Temperatures', href='/dash_app_s/line_daily_temp')
     ], className="row"),
@@ -40,6 +42,8 @@ def display_page(pathname):
         return line_daily_temp.layout
     #elif pathname == '/dash_app_s/tile_graphs':
     #    return tile_graphs.layout
+    elif pathname == '/dash_app_s/bar_day_rainfall':
+        return bar_day_rainfall.layout
     else:
         return line_monthly_rainfall.layout 
 # Run local app_

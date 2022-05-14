@@ -10,7 +10,7 @@ from graphs import line_daily_temp
 layout = html.Div([
 
     dbc.Row([
-            dbc.Col(html.Div(line_monthly_rainfall.layout), width='auto'),
+            dbc.Col(html.Div(line_monthly_rainfall.layout), width='600'),
             dbc.Col(html.Div(line_current_day_temp.layout), width='auto'),
     ]),
     dbc.Row([
