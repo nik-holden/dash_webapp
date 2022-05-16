@@ -66,6 +66,6 @@ def filtered_curr_day_temp(selected_stationID='All'):
                        color='stationID'
                        )
 
-    line_fig.update_layout(yaxis_range=[-5, 35])
+    # line_fig.update_layout(yaxis_range=[-5, 35])
 
     return line_fig

@@ -41,8 +41,8 @@ layout = html.Div([
             ),
         )
     ],className='row'),
-    dcc.Graph(id='min_daily_temp'),
     dcc.Graph(id='max_daily_temp'),
+    dcc.Graph(id='min_daily_temp'),
     dcc.Interval(
         id='dt_1-minute-interval',
         interval=60000 #60 seconds, 1 minutes
@@ -57,7 +57,7 @@ layout = html.Div([
 )
 
 def filtered_min_daily_temp(selected_stationID = 'All'):
-    if selected_stationID == selected_stationID:
+    if selected_stationID == 'All':
         filtered_dataframe = daily_temp_df
     else:
         filtered_dataframe = daily_temp_df[daily_temp_df['stationID'] == selected_stationID]
