@@ -10,7 +10,7 @@ sql_stmt = """
 SELECT 
 CASE WHEN t2.station_owner IS NOT NULL THEN t2.station_owner ELSE t1.stationID END AS stationID
 ,CAST(substring(observation_10M_reporting_period, 1,13)+':'+substring(observation_10M_reporting_period, 15,2)+':00' as datetime) AS time
-,metric_temp AS temprature 
+,metric_temp AS temperature 
 FROM weather.raw_observations t1
 JOIN weather.DIM_weatherstation_details t2 ON t1.stationID = t2.station_id
 WHERE current_date_flag = 1 
@@ -61,9 +61,13 @@ def filtered_curr_day_temp(selected_stationID='All'):
 
     line_fig = px.line(data_frame=filtered_curr_day_temp_df,
                        x='time',
-                       y='temprature',
+                       y='temperature',
                        title=f'Current Days Temperatures: {selected_stationID}',
-                       color='stationID'
+                       color='stationID',
+                       labels={
+                           'time': 'Time of Day',
+                           'temperature': 'Temperature (C)'
+                       }
                        )
 
     # line_fig.update_layout(yaxis_range=[-5, 35])

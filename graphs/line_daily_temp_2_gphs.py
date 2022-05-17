@@ -68,7 +68,11 @@ def filtered_min_daily_temp(selected_stationID = 'All'):
                        x='observation_date',
                        y='max_temperature',
                        title=f'Current Days Max Temperatures: {selected_stationID}',
-                       color='stationID'
+                       color='stationID',
+                       labels={
+                           'observation_date': 'Date',
+                           'max_temperature': 'Temperature (C)'
+                           }
                        )
 
     max_line_fig.update_layout(yaxis_range=[-5, 35])
@@ -82,7 +86,11 @@ def filtered_min_daily_temp(selected_stationID = 'All'):
                        x='observation_date',
                        y='min_temperature',
                        title=f'Current Days Min Temperatures: {selected_stationID}',
-                       color='stationID'
+                       color='stationID',
+                       labels={
+                           'observation_date': 'Date',
+                           'min_temperature': 'Temperature (C)'
+                           }
                        )
 
     min_line_fig.update_layout(yaxis_range=[-5, 35])

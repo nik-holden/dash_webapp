@@ -79,6 +79,11 @@ def filtered_single_day_rain(selected_stationID='All'):
                        x='stationID',
                        y='hourly_rain_fall',
                        title=f'Current Days Hourly Rainfall: {selected_stationID}',
-                       color='observation_hour'
+                       color='observation_hour',
+                       labels={
+                           'stationID': 'Station ID',
+                           'hourly_rain_fall': 'Rain Fall (mm)'
+                           
+                       }
                     )
     return bar_fig

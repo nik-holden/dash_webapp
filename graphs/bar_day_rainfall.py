@@ -62,6 +62,10 @@ def filtered_single_day_rain(selected_stationID='All'):
                        x='stationID',
                        y='rainfall_total',
                        title=f'Current Days Total Rainfall: {selected_stationID}',
-                       color='stationID'
+                       color='stationID',
+                       labels={
+                           'stationID': 'Station ID',
+                           'rainfall_total': 'Total Rainfall (mm)'
+                           }
                     )
     return bar_fig

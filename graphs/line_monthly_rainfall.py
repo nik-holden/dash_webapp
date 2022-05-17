@@ -62,6 +62,10 @@ def filtered_daily_rain(selected_stationID='All'):
                        x='observation_date',
                        y='running_rainfall_total',
                        title=f'Current Months Daily Total Rainfall: {selected_stationID}',
-                       color='stationID'
+                       color='stationID',
+                       labels={
+                           'observation_date': 'Date',
+                           'running_rainfall_total': 'Total Rainfall (mm)'
+                       }
                     )
     return line_fig
