@@ -6,30 +6,30 @@ from common_functions import read_from_db
 
 sql_stmt = """
 WITH cte_a AS (SELECT 
-CASE WHEN t2.station_owner IS NOT NULL THEN t2.station_owner ELSE t1.stationID END AS stationID
-, observation_date
-, observation_hour
-, 
-sum(metric_precipitationTotal) as total_rain_fall,
-rownum = row_number() OVER (ORDER BY (SELECT 0))
-FROM [weather].[raw_observations] t1
+CASE WHEN t2.station_owner IS NOT NULL THEN t2.station_owner ELSE t1.stationID END AS stationID, 
+observation_date, 
+observation_hour,
+max(metric_precipitationTotal) as total_rain_fall
+FROM [weather].[raw_observations]t1
 JOIN weather.DIM_weatherstation_details t2 ON t1.stationID = t2.station_id
 WHERE current_date_flag = 1
-GROUP BY CASE WHEN t2.station_owner IS NOT NULL THEN t2.station_owner ELSE t1.stationID END, observation_date, observation_hour)
+GROUP BY stationID, 
+observation_date, 
+observation_hour,
+CASE WHEN t2.station_owner IS NOT NULL THEN t2.station_owner ELSE t1.stationID END
+)
 
 
 select 
 stationID, 
-
 observation_date, 
-observation_hour, 
-total_rain_fall,
+observation_hour,
 CASE
-	WHEN total_rain_fall  - lag(total_rain_fall) OVER (PARTITION BY stationID ORDER BY observation_hour) > 1
+	WHEN total_rain_fall  - lag(total_rain_fall) OVER (PARTITION BY stationID ORDER BY observation_hour) > 0
 	THEN ISNULL(total_rain_fall  - lag(total_rain_fall) OVER (PARTITION BY stationID ORDER BY observation_hour), 0) 
 	ELSE total_rain_fall
 END AS hourly_rain_fall
-from cte_a a
+FROM cte_a
 """
 
 #daily_rain_df = pd.read_sql(sql_stmt, conn)

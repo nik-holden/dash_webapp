@@ -15,8 +15,6 @@ from graphs import stacked_bar_day_rainfall_hr
 app_ = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app = app_.server
-print('app_ ', callable(app_))
-print('app ', callable(app))
 
 app_.layout = html.Div([ 
     dcc.Location(id='url', refresh=False),

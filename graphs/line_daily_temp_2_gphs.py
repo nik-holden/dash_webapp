@@ -26,8 +26,6 @@ station_list.append('All')
 
 station_list.sort()
 
-print(station_list)
-
 layout = html.Div([
 
     html.H1('Daily high-low Temperatures'),
