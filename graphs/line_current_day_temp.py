@@ -43,7 +43,8 @@ layout = html.Div([
     dcc.Graph(id='curr_day_temp'),
     dcc.Interval(
         id='lcd_1-minute-interval',
-        interval=60000 #60 seconds, 1 minutes
+        interval=30000, #30 seconds
+        n_intervals=0
     )
 ])
 
