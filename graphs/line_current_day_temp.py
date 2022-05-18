@@ -51,7 +51,8 @@ layout = html.Div([
 # set up callback function
 @callback(
     Output(component_id='curr_day_temp', component_property='figure'),
-    Input(component_id='cdt_station_ID', component_property='value')
+    Input(component_id='cdt_station_ID', component_property='value'),
+    Input(component_id='lcd_1-minute-interval', component_property='n_intervals')
 )
 
 def filtered_curr_day_temp(selected_stationID='All'):
