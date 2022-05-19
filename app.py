@@ -51,7 +51,9 @@ def display_page(pathname):
     elif pathname == '/dash_app_s/stacked_bar_day_rainfall_hr':
         return stacked_bar_day_rainfall_hr.layout
     else:
-        return line_monthly_rainfall.layout 
+        return line_monthly_rainfall.layout
+
+
 # Run local app_
 if __name__ == '__main__':
     

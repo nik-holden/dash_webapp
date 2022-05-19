@@ -55,6 +55,7 @@ layout = html.Div([
 )
 
 def filtered_min_daily_temp(selected_stationID = 'All'):
+    daily_temp_df = read_from_db(sql_stmt)
     if selected_stationID == 'All':
         filtered_dataframe = daily_temp_df
     else:

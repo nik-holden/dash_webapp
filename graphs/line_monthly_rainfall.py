@@ -53,6 +53,7 @@ layout = html.Div([
 )
 
 def filtered_daily_rain(selected_stationID='All'):
+    daily_rain_df = read_from_db(sql_stmt)
     if selected_stationID == 'All':
         filtered_daily_rain_df = daily_rain_df
     else:

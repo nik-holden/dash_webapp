@@ -3,7 +3,6 @@ import plotly.express as px
 
 from common_functions import read_from_db
 
-
 sql_stmt = """
 SELECT 
 CASE WHEN t2.station_owner IS NOT NULL THEN t2.station_owner ELSE t1.stationID END AS stationID
@@ -53,6 +52,7 @@ layout = html.Div([
 )
 
 def filtered_single_day_rain(selected_stationID='All'):
+    daily_rain_df = read_from_db(sql_stmt)
     if selected_stationID == 'All':
         filtered_daily_rain_df = daily_rain_df
     else:

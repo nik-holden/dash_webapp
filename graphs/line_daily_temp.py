@@ -54,6 +54,7 @@ layout = html.Div([
 )
 
 def filtered_daily_temp(selected_stationID=first_stationID):
+    daily_temp_df = read_from_db(sql_stmt)
     if selected_stationID == selected_stationID:
         filtered_daily_temp_df = daily_temp_df[daily_temp_df['stationID'] == selected_stationID]
 

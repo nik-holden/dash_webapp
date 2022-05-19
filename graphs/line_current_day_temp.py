@@ -5,7 +5,6 @@ from common_functions import read_from_db, temp_axis_temp_list
 
 temprature_axis_list = temp_axis_temp_list(-4, 40)
 
-
 sql_stmt = """
 SELECT 
 CASE WHEN t2.station_owner IS NOT NULL THEN t2.station_owner ELSE t1.stationID END AS stationID
@@ -18,6 +17,9 @@ ORDER BY t2.station_id, t1.observation_10M_reporting_period
 """
 
 curr_day_temp_df = read_from_db(sql_stmt)
+
+station_list = [i for i in curr_day_temp_df['stationID'].unique()]
+
 
 # Create list of station ID's
 station_list = [i for i in curr_day_temp_df['stationID'].unique()]
@@ -43,7 +45,7 @@ layout = html.Div([
     dcc.Graph(id='curr_day_temp'),
     dcc.Interval(
         id='lcd_1-minute-interval',
-        interval=30000, #30 seconds
+        interval=60000, #60 seconds
         n_intervals=0
     )
 ])
@@ -51,11 +53,11 @@ layout = html.Div([
 # set up callback function
 @callback(
     Output(component_id='curr_day_temp', component_property='figure'),
-    Input(component_id='cdt_station_ID', component_property='value'),
-    Input(component_id='lcd_1-minute-interval', component_property='n_intervals')
-)
+   [Input(component_id='cdt_station_ID', component_property='value')]
+    )
 
 def filtered_curr_day_temp(selected_stationID='All'):
+    curr_day_temp_df = read_from_db(sql_stmt)
     if selected_stationID == 'All':
         filtered_curr_day_temp_df = curr_day_temp_df
     else:

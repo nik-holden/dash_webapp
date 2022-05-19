@@ -27,7 +27,7 @@ observation_hour,
 CASE
 	WHEN total_rain_fall  - lag(total_rain_fall) OVER (PARTITION BY stationID ORDER BY observation_hour) > 0
 	THEN ISNULL(total_rain_fall  - lag(total_rain_fall) OVER (PARTITION BY stationID ORDER BY observation_hour), 0) 
-	ELSE total_rain_fall
+	ELSE 0
 END AS hourly_rain_fall
 FROM cte_a
 """
@@ -70,6 +70,7 @@ layout = html.Div([
 )
 
 def filtered_single_day_rain(selected_stationID='All'):
+    hourly_rain_df = read_from_db(sql_stmt)
     if selected_stationID == 'All':
         filtered_daily_rain_df = hourly_rain_df
     else:
