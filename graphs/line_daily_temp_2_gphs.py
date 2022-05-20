@@ -63,7 +63,6 @@ def filtered_min_daily_temp(selected_stationID = 'All'):
     
 
     filtered_max_daily_temp = filtered_dataframe.loc[:, filtered_dataframe.columns!='min_temperature']
-    max_line_fig = px.line()
 
     max_line_fig = px.line(data_frame=filtered_max_daily_temp,
                        x='observation_date',
@@ -80,8 +79,6 @@ def filtered_min_daily_temp(selected_stationID = 'All'):
 
     
     filtered_min_daily_temp = filtered_dataframe.loc[:, filtered_dataframe.columns!='max_temperature']
-    
-    min_line_fig = px.line
 
     min_line_fig = px.line(data_frame=filtered_min_daily_temp,
                        x='observation_date',
