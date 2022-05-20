@@ -6,7 +6,12 @@ from common_functions import read_from_db
 sql_stmt = """
 SELECT
 CASE WHEN t2.station_owner IS NOT NULL THEN t2.station_owner ELSE t1.stationID END AS stationID
--- ,observation_date
+,CASE
+	WHEN FORMAT(observation_date, 'MM') IN ('01', '02', '12') THEN 'Summer'
+	WHEN FORMAT(observation_date, 'MM') IN ('03', '04', '05') THEN 'Autum/Fall'
+	WHEN FORMAT(observation_date, 'MM') IN ('06', '07', '08') THEN 'Winter'
+	WHEN FORMAT(observation_date, 'MM') IN ('09', '10', '11') THEN 'Spring'
+END AS season
 ,metric_min_temp AS min_temperature
 ,metric_max_temp AS max_temperature
 from weather.daily_weather_metrics t1
@@ -18,9 +23,11 @@ temp_range_df = read_from_db(sql_stmt)
 
 # Create list of station ID's
 station_list = [i for i in temp_range_df['stationID'].unique()]
+season_list = [i for i in temp_range_df['season'].unique()]
 
 # Add the 'All' values to the list of station
 station_list.append('All')
+season_list.append('All')
 
 station_list.sort()
 
@@ -30,10 +37,10 @@ layout = html.Div([
 
     html.Div([
         html.Div(dcc.Dropdown(
-            id='dt_station_ID',
+            id='season',
             clearable=False,
             value='All',
-            options=[{'label': i, 'value': i} for i in station_list],
+            options=[{'label': i, 'value': i} for i in season_list],
             ),
         )
     ],className='row'),
@@ -49,15 +56,15 @@ layout = html.Div([
 @callback(
     Output(component_id='max_temp_range', component_property='figure'),
     Output(component_id='min_temp_range', component_property='figure'),
-    Input(component_id='dt_station_ID', component_property='value')
+    Input(component_id='season', component_property='value')
 )
 
-def filtered_min_daily_temp(selected_stationID = 'All'):
+def filtered_min_daily_temp(season = 'All'):
     temp_range_df = read_from_db(sql_stmt)
-    if selected_stationID == 'All':
+    if season == 'All':
         filtered_dataframe = temp_range_df
     else:
-        filtered_dataframe = temp_range_df[temp_range_df['stationID'] == selected_stationID]
+        filtered_dataframe = temp_range_df[temp_range_df['season'] == season]
     
 
     filtered_temp_range_df = filtered_dataframe.loc[:, filtered_dataframe.columns!='min_temperature']
@@ -65,7 +72,7 @@ def filtered_min_daily_temp(selected_stationID = 'All'):
     max_box_fig = px.box(data_frame=filtered_temp_range_df,
                        x='stationID',
                        y='max_temperature',
-                       title=f'Max Temperatures: {selected_stationID}',
+                       title=f'Max Temperatures: {season}',
                        color='stationID'
                        )
     
@@ -74,7 +81,7 @@ def filtered_min_daily_temp(selected_stationID = 'All'):
     min_box_fig = px.box(data_frame=filtered_temp_range_df,
                        x='stationID',
                        y='min_temperature',
-                       title=f'Min Temperatures: {selected_stationID}',
+                       title=f'Min Temperatures: {season}',
                        color='stationID'
                        )
 
