@@ -4,7 +4,7 @@ import dash.dcc as dcc
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 
-from graphs import line_monthly_rainfall, line_current_day_temp, line_daily_temp, bar_day_rainfall, line_daily_temp_2_gphs, stacked_bar_day_rainfall_hr, box_whisker_daily_temp
+from graphs import line_monthly_rainfall, line_current_day_temp, line_daily_temp, bar_day_rainfall, line_daily_temp_2_gphs, stacked_bar_day_rainfall_hr, box_whisker_daily_temp, line_bar_monthly_rainfall
 
 #from graphs import tile_graphs
 
@@ -23,6 +23,7 @@ app_.layout = html.Div([
         dcc.Link('Daily high-low Temperatures', href='/dash_app_s/line_daily_temp'),
         dcc.Link('Min - Max Temperature Graphs', href='/dash_app_s/line_daily_temp_2_gphs'),
         dcc.Link('Temperature Range', href='/dash_app_s/box_whisker_daily_temp'),
+        dcc.Link('Total Monthly Rainfall line and bar', href='/dash_apps/line_bar_monthly_rainfall')
         #dcc.Link('Temperature Range Graphs', href='/dash_app_s/box_daily_temp')
     ], className="row"),
     html.Div(id='page_content', children=[])
@@ -50,6 +51,8 @@ def display_page(pathname):
         return stacked_bar_day_rainfall_hr.layout
     elif pathname == '/dash_app_s/box_whisker_daily_temp':
         return box_whisker_daily_temp.layout
+    elif pathname == '/dash_apps/line_bar_monthly_rainfall':
+        return line_bar_monthly_rainfall.layout
     else:
         return line_monthly_rainfall.layout
 

@@ -39,7 +39,9 @@ layout = html.Div([
             ),
         )
     ],className='row'),
-    dcc.Graph(id='total_daily_rain'),
+    dcc.Graph(id='total_daily_rain_line'),
+    dcc.Graph(id='total_daily_rain_bar'),
+
     dcc.Interval(
         id='mr_1-minute-interval',
         interval=60000 #60 seconds, 1 minutes
@@ -48,7 +50,8 @@ layout = html.Div([
 
 # set up callback function
 @callback(
-    Output(component_id='total_daily_rain', component_property='figure'),
+    Output(component_id='total_daily_rain_line', component_property='figure'),
+    Output(component_id='total_daily_rain_bar', component_property='figure'),
     Input(component_id='mr_station_ID', component_property='value')
 )
 
@@ -70,4 +73,14 @@ def filtered_daily_rain(selected_stationID='All'):
                        }
                     )
     
-    return line_fig
+    bar_fig = px.bar(data_frame=filtered_daily_rain_df,
+                       x='stationID',
+                       y='running_rainfall_total',
+                       title=f'Current Months Daily Total Rainfall: Bar: {selected_stationID}',
+                       color='observation_date',
+                       labels={
+                           'stationID': 'station ID',
+                           'running_rainfall_total': 'Total Rainfall (mm)'
+                       }
+                    )
+    return line_fig, bar_fig
