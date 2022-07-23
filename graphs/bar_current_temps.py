@@ -83,7 +83,7 @@ def weather_obs():
 current_temps_df = weather_obs()
 station_list = weather_stations()
 # Add the 'All' values to the list of station
-station_list.append('All')
+#station_list.append('All')
 
 station_list.sort()
 
@@ -106,7 +106,7 @@ app_.layout = html.Div([
     value=0,
     label = 'Current Temperature',
     color='red',
-    min=-5,
+    min=-10,
     max=45,
     style={
         'margin-bottom': '5%'
