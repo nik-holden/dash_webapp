@@ -24,8 +24,8 @@ app_.layout = html.Div([
         dcc.Link('Min - Max Temperature Graphs', href='/dash_app_s/line_daily_temp_2_gphs'),
         dcc.Link('Temperature Range', href='/dash_app_s/box_whisker_daily_temp'),
         dcc.Link('Total Monthly Rainfall line and bar', href='/dash_app_s/line_bar_monthly_rainfall'),
-        #dcc.Link('YTD rainfall', href='/dash_app_s/line_rain_fall_YTD')
-        dcc.Link('Current Temps', href='/dash_app_s/bar_current_temps')
+        dcc.Link('YTD rainfall', href='/dash_app_s/line_rain_fall_YTD')
+        #dcc.Link('Current Temps', href='/dash_app_s/bar_current_temps')
     ], className="row"),
     html.Div(id='page_content', children=[])
 ])
