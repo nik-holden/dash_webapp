@@ -54,8 +54,8 @@ def display_page(pathname):
         return box_whisker_daily_temp.layout
     elif pathname == '/dash_apps/line_bar_monthly_rainfall':
         return line_bar_monthly_rainfall.layout
-    elif pathname == '/dash_app_s/bar_current_temps':
-        return bar_current_temps.layout
+    #elif pathname == '/dash_app_s/bar_current_temps':
+    #    return bar_current_temps.layout
     elif pathname == '/dash_app_s/line_rain_fall_YTD':
         return line_rain_fall_YTD.layout
     else:
