@@ -18,120 +18,103 @@ base_url = 'https://api.weather.com/v2/pws/observations'
 period = 'current'
 format = 'json'
 units = 'm'
-apiKey = '2af8653072354d19b8653072358d194f'
+apiKey = '41c4bcd2fc984f7f84bcd2fc981f7f81'
 
 personal_weather_station = {
-    'stationId': ['IAUKHIGH2', 'INEWPL81', 'IUPPER72', 'IKATIKAT9', 
-     'ICLYDE9', 'IWGNLYAL3', 'IKATIK3', 'IALEXA39']}
+    'stationId': ['IAUKHIGH2', 'INEWPL81', 'IUPPER72']} #, 'IKATIKAT9', 
+     #'ICLYDE9', 'IWGNLYAL3', 'IKATIK3', 'IALEXA39']}
+
+station_id = ['IAUKHIGH2', 'INEWPL81', 'IUPPER72', 'IKATIKAT9', 'ICLYDE9', 'IWGNLYAL3', 'IKATIK3', 'IALEXA39']
 
 
-def station_url(base_url, period, stationId, format, units, apiKey):
+def station_url(stationId, base_url=base_url, period=period, format='json', units=units, apiKey=apiKey):
     url = f'{base_url}/{period}?stationId={stationId}&format={format}&units={units}&apiKey={apiKey}'
 
     return url
 
-def json_to_pandas_dataframe(weather_observation_data):
-    data = pd.DataFrame(list(weather_observation_data.items()),columns = ['stationId', 'temp'])
-
-    return data
     
 def get_weather_station_observations(url):
     
+    print(url)
+    
     response = requests.get(url)
- 
-    json_payload = response.json()
 
-    weather_observation = json_payload['observations'][0]['metric']['temp']
+    print(response.status_code)
 
+    if response.status_code == 200:
+        json_payload = response.json()
 
-    return weather_observation
+        temp = json_payload['observations'][0]['metric']['temp']
 
-def weather_stations():
+        return temp
 
-    weather_station_list = personal_weather_station.get('stationId')
-
-    return weather_station_list
-
-def weather_obs():
-    weather_station_list = weather_stations()
-
-    station_current_temps_dict = {}
-    for weather_station in weather_station_list:
-        url = station_url(base_url,
-                          period,
-                          weather_station,
-                          format,
-                          units,
-                          apiKey)
-        
-        #  A try/except block has been added due to a weather station going no longer being reachable and causing the job to fail
-        try:
-            
-            station_current_temps_dict[weather_station] = get_weather_station_observations(url)
-        
-        except Exception as e:
-            print('an error occurred: ', e)
-
+    else:
+        return 0
     
-    #data = json_to_pandas_dataframe(station_current_temps_dict)
 
-    data = station_current_temps_dict
+def get_current_temp(station):
+    url = station_url(station)
+    temp = get_weather_station_observations(url)
 
-    return  data
+    #temp = observtions['temp']
 
-
-current_temps_df = weather_obs()
-station_list = weather_stations()
-# Add the 'All' values to the list of station
-#station_list.append('All')
-
-station_list.sort()
-
-#value = 10
-
-app_.layout = html.Div([
-
-    html.H1('Current Temperature'),
-
-    html.Div([
-        html.Div(dcc.Dropdown(
-            id='ct_station_ID',
-            clearable=False,
-            value='INEWPL81',
-            options=[{'label': i, 'value': i} for i in station_list],
-            ),
-        )
-    ],className='row'),
-    daq.Thermometer(id='current_temp',
-    value=0,
-    label = 'Current Temperature',
-    color='red',
-    min=-10,
-    max=45,
-    style={
-        'margin-bottom': '5%'
-    }),
-    dcc.Interval(
-        id='dr_1-minute-interval',
-        interval=60000 #60 seconds, 1 minutes
-    )
-])
-
-# set up callback function
-@callback(
-    Output(component_id='current_temp', component_property='value'),
-    Input(component_id='ct_station_ID', component_property='value')
-)
-
-def update_thermostat(selected_stationID='INEWPL81'):
-    v = current_temps_df[selected_stationID]
-    print(selected_stationID, v)
-    temp = v
-    
     return temp
+
+def get_layout(station):
+
+    temp = get_current_temp(station)
+
+    layout = html.Td([dbc.Col([daq.Thermometer(id=f'thermometer_{station}',
+        label=station,
+        showCurrentValue=True,
+        units="C",
+        color=get_thermometer_colour(temp),
+        value=temp,
+        min=0,
+        max=40,
+        style={
+        'margin-bottom': '5%'
+        }
+    )])])
+
+    return layout
+
+
+def get_thermometer_colour(temp):
+    if temp <9:
+        colour = 'Blue'
+    elif temp <19:
+        colour = 'Orange'
+
+    else:
+        colour = 'Red'
+
+    return colour
+
+
+def main():
+    
+    app_.layout = html.Div([
+        html.H4([
+            'Current Temperature'
+        ]),
+        html.Table(style={'width':'100%'}, children=[
+            html.Tbody([
+                html.Tr([
+                    get_layout(i) for i in station_id        
+                ])
+            ])
+
+    ])        
+        ])
+    
+    app_.run_server(debug=False)
 
 
 if __name__ == '__main__':
 
    #weather_obs()
-    app_.run_server(debug=False)
+
+   main()
+    
+    

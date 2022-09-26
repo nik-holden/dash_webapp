@@ -1,3 +1,4 @@
+from __future__ import barry_as_FLUFL
 from dash import html, dcc, callback, Input, Output
 import plotly.express as px
 
@@ -76,6 +77,7 @@ def filtered_single_day_rain(selected_stationID='All'):
     else:
         filtered_daily_rain_df = hourly_rain_df[hourly_rain_df['stationID'] == selected_stationID]
 
+
     bar_fig = px.bar(data_frame=filtered_daily_rain_df,
                        x='stationID',
                        y='hourly_rain_fall',
@@ -87,4 +89,7 @@ def filtered_single_day_rain(selected_stationID='All'):
                            
                        }
                     )
+    
+    bar_fig.update_layout(legend_traceorder="reversed")
+    
     return bar_fig
