@@ -9,9 +9,9 @@ import dash_bootstrap_components as dbc
 #from common_functions import read_from_db
 
 
-app_ = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+#app_ = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-app = app_.server
+#app = app_.server
 
 # PSW
 base_url = 'https://api.weather.com/v2/pws/observations'
@@ -35,12 +35,9 @@ def station_url(stationId, base_url=base_url, period=period, format='json', unit
     
 def get_weather_station_observations(url):
     
-    print(url)
-    
     response = requests.get(url)
 
-    print(response.status_code)
-
+    
     if response.status_code == 200:
         json_payload = response.json()
 
@@ -55,8 +52,6 @@ def get_weather_station_observations(url):
 def get_current_temp(station):
     url = station_url(station)
     temp = get_weather_station_observations(url)
-
-    #temp = observtions['temp']
 
     return temp
 
@@ -81,10 +76,16 @@ def get_layout(station):
 
 
 def get_thermometer_colour(temp):
-    if temp <9:
+    if temp == None:
+        temp = 0
+    if temp <10:
         colour = 'Blue'
-    elif temp <19:
+
+    elif temp <20:
         colour = 'Orange'
+
+    elif temp <30:
+        colour ='OrangeRed'
 
     else:
         colour = 'Red'
@@ -92,29 +93,27 @@ def get_thermometer_colour(temp):
     return colour
 
 
-def main():
     
-    app_.layout = html.Div([
-        html.H4([
-            'Current Temperature'
-        ]),
-        html.Table(style={'width':'100%'}, children=[
-            html.Tbody([
-                html.Tr([
-                    get_layout(i) for i in station_id        
-                ])
+layout = html.Div([
+    html.H4([
+        'Current Temperature'
+    ]),
+    html.Table(style={'width':'100%'}, children=[
+        html.Tbody([
+            html.Tr([
+                get_layout(i) for i in station_id        
             ])
-
-    ])        
         ])
+
+])        
+    ])
+
+
     
-    app_.run_server(debug=False)
+    #app_.run_server(debug=False)
 
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
 
-   #weather_obs()
-
-   main()
-    
+#   current_temp()
     
