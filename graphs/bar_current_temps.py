@@ -55,6 +55,24 @@ def get_current_temp(station):
 
     return temp
 
+def get_thermometer_colour(temp):
+    if temp == None:
+        temp = 0
+    if temp <10:
+        colour = 'Blue'
+
+    elif temp <20:
+        colour = 'Orange'
+
+    elif temp <30:
+        colour ='OrangeRed'
+
+    else:
+        colour = 'Red'
+
+    return colour
+    
+    
 def get_layout(station):
 
     temp = get_current_temp(station)
@@ -75,24 +93,6 @@ def get_layout(station):
     return layout
 
 
-def get_thermometer_colour(temp):
-    if temp == None:
-        temp = 0
-    if temp <10:
-        colour = 'Blue'
-
-    elif temp <20:
-        colour = 'Orange'
-
-    elif temp <30:
-        colour ='OrangeRed'
-
-    else:
-        colour = 'Red'
-
-    return colour
-
-
     
 layout = html.Div([
     html.H4([
@@ -108,12 +108,3 @@ layout = html.Div([
 ])        
     ])
 
-
-    
-    #app_.run_server(debug=False)
-
-
-#if __name__ == '__main__':
-
-#   current_temp()
-    
