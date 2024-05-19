@@ -1,12 +1,7 @@
-def temp_axis_temp_list(start: int=0, end: int=40) -> list: 
-    temp_list = []
-    start_temp = start
-    temp = start_temp
+from common_functions import read_from_db, azure_sql_db_connection
 
-    while temp <= end:
-        temp_list.append(temp)
-        temp += 2
+def main():
+    azure_sql_db_connection()
 
-    return temp_list
-
-print(temp_axis_temp_list(-8, 40))
+if __name__ == '__main__':
+    main()
